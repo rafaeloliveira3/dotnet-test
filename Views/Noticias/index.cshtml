@@ -1,0 +1,42 @@
+@model IEnumerable<Noticia>
+
+
+<form action="@Url.Action("Logout", "Account")" method="post">
+    <button type="submit" class="btn btn-warning">Sair</button>
+</form>
+
+<div class="row">
+    @foreach(var noticia in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="@noticia.ImagemURL" class="card-img-top" alt="...">
+            @noticia.ImagemURL
+            <div class="card-body">
+            <h5 class="card-title">@noticia.Cabecalho</h5>
+            <p class="card-text">@noticia.Texto</p>
+            <form method="post" asp-action="Excluir">
+                <input type="hidden" name="Id" value="@noticia.Id" />
+                <input class="btn btn-primary" type="submit" value="Excluir">
+            </form>
+            </div>
+        </div>
+    }
+</div>
+
+<h2>Adicione novas notícias</h2>
+<form method="post" asp-action="Adicionar">
+    <div class="row">
+        <div class="col-12">
+            <input type="text" name="Cabecalho" placeholder="Digite o cabeçalho" />
+        </div>
+        <div class="col-12">
+            <input type="text" name="ImagemURL" placeholder="Coloque o endereço da imagem" />
+        </div>
+        <div class="col-12">
+            <textarea name="Texto" placeholder="Digite o texto da notícia"></textarea>
+        </div>
+        <div>
+            <input class="btn btn-primary" type="submit" value="Adicionar notícias" />
+        </div>
+    </div>
+</form>
